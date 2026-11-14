@@ -1262,6 +1262,9 @@ following image formats are supported:
     @tab fourcc: TSC2
 @item Theora                 @tab  E  @tab  X
     @tab encoding supported through external library libtheora
+@item TICO RAW               @tab     @tab  X
+    @tab Raw video of Nikon N-RAW (fourcc NRAW) and R3D NE (fourcc NR3D) files.
+         Decoded to the linear Bayer mosaic.
 @item Tiertex Limited SEQ video  @tab     @tab  X
     @tab Codec used in DOS CD-ROM FlashBack game.
 @item Ut Video               @tab  X  @tab  X
