@@ -751,7 +751,8 @@ OBJS-$(CONFIG_TARGA_ENCODER)           += targaenc.o rle.o
 OBJS-$(CONFIG_TARGA_Y216_DECODER)      += targa_y216dec.o
 OBJS-$(CONFIG_TDSC_DECODER)            += tdsc.o
 OBJS-$(CONFIG_TICO_RAW_DECODER)        += ticorawdec.o ticoraw_core.o ticoraw_dsp.o \
-                                          ticoraw_entropy.o ticoraw_header.o ticoraw_nraw.o
+                                          ticoraw_entropy.o ticoraw_header.o ticoraw_nraw.o \
+                                          ticoraw_view.o
 OBJS-$(CONFIG_TIERTEXSEQVIDEO_DECODER) += tiertexseqv.o
 OBJS-$(CONFIG_TIFF_DECODER)            += tiff.o lzw.o faxcompr.o tiff_common.o
 OBJS-$(CONFIG_TIFF_ENCODER)            += tiffenc.o rle.o lzwenc.o
