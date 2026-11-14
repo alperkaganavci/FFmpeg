@@ -41,6 +41,11 @@ enum AVRawColorParamsType {
      * (codec.rw2).
      */
     AV_RAW_COLOR_PARAMS_RW2,
+    /**
+     * The union is valid when interpreted as AVTicoRawColorParams
+     * (codec.tico_raw).
+     */
+    AV_RAW_COLOR_PARAMS_TICO_RAW,
 };
 
 /**
@@ -110,6 +115,42 @@ typedef struct AVRW2RawColorParams {
 } AVRW2RawColorParams;
 
 /**
+ * TICO RAW (Nikon N-RAW and R3D NE) as-shot color transform, from the
+ * metadata that the camera stores with every frame.
+ *
+ * The correct rendering pipeline is:
+ *  -> (sample - black_level) / (white_level - black_level)
+ *  -> per-channel white balance (wb_red, 1.0 for G, wb_blue) pre-debayer
+ *  -> debayer
+ *  -> color_matrix (white balanced camera RGB -> CIE 1931 XYZ relative to D65)
+ *
+ * Black/white levels live on the outer AVRawColorParams. The samples are
+ * linear sensor values, so the pipeline needs no linearization step.
+ *
+ * @note The struct must be allocated as part of AVRawColorParams using
+ *       av_raw_color_params_alloc(). Its size is not a part of the public ABI.
+ */
+typedef struct AVTicoRawColorParams {
+    /**
+     * White balance multiplier for the red channel, applied pre-debayer.
+     */
+    AVRational wb_red;
+
+    /**
+     * White balance multiplier for the blue channel, applied pre-debayer.
+     * The green channel is implicitly 1.0.
+     */
+    AVRational wb_blue;
+
+    /**
+     * 3x3 row-major color matrix from white balanced camera RGB to linear-light
+     * CIE 1931 XYZ relative to the D65 illuminant, applied post-debayer.
+     * out[i] = sum_j color_matrix[i][j] * in[j].
+     */
+    AVRational color_matrix[3][3];
+} AVTicoRawColorParams;
+
+/**
  * Per-frame color information for a RAW camera codec. Carried as side data of
  * type AV_FRAME_DATA_RAW_COLOR_PARAMS.
  *
@@ -155,6 +196,7 @@ typedef struct AVRawColorParams {
     union {
         AVProResRawColorParams prores_raw;
         AVRW2RawColorParams rw2;
+        AVTicoRawColorParams tico_raw;
     } codec;
 } AVRawColorParams;
 
