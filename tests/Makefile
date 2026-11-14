@@ -270,6 +270,7 @@ include $(SRC_PATH)/tests/fate/source.mak
 include $(SRC_PATH)/tests/fate/spdif.mak
 include $(SRC_PATH)/tests/fate/speedhq.mak
 include $(SRC_PATH)/tests/fate/subtitles.mak
+include $(SRC_PATH)/tests/fate/ticoraw.mak
 include $(SRC_PATH)/tests/fate/truehd.mak
 include $(SRC_PATH)/tests/fate/utvideo.mak
 include $(SRC_PATH)/tests/fate/vbn.mak
