@@ -239,6 +239,9 @@ const AVCodecTag ff_codec_movvideo_tags[] = {
     { AV_CODEC_ID_PRORES_RAW, MKTAG('a', 'p', 'r', 'n') }, /* Apple ProRes RAW */
     { AV_CODEC_ID_PRORES_RAW, MKTAG('a', 'p', 'r', 'h') }, /* Apple ProRes RAW HQ */
 
+    { AV_CODEC_ID_TICO_RAW, MKTAG('N', 'R', 'A', 'W') }, /* Nikon N-RAW */
+    { AV_CODEC_ID_TICO_RAW, MKTAG('N', 'R', '3', 'D') }, /* Nikon R3D NE */
+
     { AV_CODEC_ID_FLIC,   MKTAG('f', 'l', 'i', 'c') },
 
     { AV_CODEC_ID_AIC, MKTAG('i', 'c', 'o', 'd') },

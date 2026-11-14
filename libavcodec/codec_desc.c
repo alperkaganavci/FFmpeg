@@ -1992,6 +1992,13 @@ static const AVCodecDescriptor codec_descriptors[] = {
         .props     = AV_CODEC_PROP_LOSSY | AV_CODEC_PROP_LOSSLESS,
         .mime_types= MT("image/webp"),
     },
+    {
+        .id        = AV_CODEC_ID_TICO_RAW,
+        .type      = AVMEDIA_TYPE_VIDEO,
+        .name      = "tico_raw",
+        .long_name = NULL_IF_CONFIG_SMALL("intoPIX TICO RAW (Nikon N-RAW, R3D NE)"),
+        .props     = AV_CODEC_PROP_INTRA_ONLY | AV_CODEC_PROP_LOSSY,
+    },
 
     /* various PCM "codecs" */
     {
