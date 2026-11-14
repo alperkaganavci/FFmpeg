@@ -153,6 +153,11 @@ fail:
     return ret;
 }
 
+int ff_ticoraw_nb_threads(const AVCodecContext *avctx)
+{
+    return avctx->active_thread_type & FF_THREAD_SLICE ? FFMAX(avctx->thread_count, 1) : 1;
+}
+
 int ff_ticoraw_nb_row_jobs(const AVCodecContext *avctx, int rows)
 {
     if (!(avctx->active_thread_type & FF_THREAD_SLICE) || avctx->thread_count <= 1)
@@ -168,8 +173,7 @@ int ff_ticoraw_core_init(TicoRawCore **core, const TicoRawHeader *h, AVCodecCont
     if (!c)
         return AVERROR(ENOMEM);
     c->avctx      = avctx;
-    c->nb_threads = avctx->active_thread_type & FF_THREAD_SLICE ?
-                    FFMAX(avctx->thread_count, 1) : 1;
+    c->nb_threads = ff_ticoraw_nb_threads(avctx);
     c->thread     = av_calloc(c->nb_threads, sizeof(*c->thread));
     if (!c->thread) {
         av_free(c);

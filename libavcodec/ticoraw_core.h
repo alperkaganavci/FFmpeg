@@ -81,6 +81,13 @@ int ff_ticoraw_decode_planes(TicoRawCore *core, const uint8_t *cs, int size,
                              const TicoRawHeader *h, TicoRawPlanes *out);
 
 /**
+ * Number of threads that can run jobs of avctx->execute2() at the same time: the slice
+ * thread count with slice threads, else 1. The threadnr argument of a job is below it, so
+ * it sizes per-thread scratch.
+ */
+int ff_ticoraw_nb_threads(const struct AVCodecContext *avctx);
+
+/**
  * Number of jobs to split rows rows over in avctx->execute2(): 1 without slice threads,
  * else a few jobs per thread, so that faster cores take more of them.
  */
